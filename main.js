@@ -1,3 +1,4 @@
+///getting the esential values from the html
 
 let player=document.querySelector('player')
 
@@ -22,12 +23,14 @@ let hold=document.querySelector('.btn--hold')
 let currscore=0
 
 let activeplayer=0
-let RealScore=[0,0]
+let RealScore=[0,0] //to store the real scores of the players
 
 score1.textContent= 0;
 score2.textContent= 0;
-let playing=true
+let playing=true //to know the current status of the game
 
+
+/// this function make the switch  between the two players
 let change=function(){
     currscore=0
     activeplayer=activeplayer ===0?1:0  
@@ -40,21 +43,23 @@ player2.classList.toggle('player--active')
 
 
 
-dice.classList.add('hidden')
+dice.classList.add('hidden')// hide the dice images
 
 
-roll.addEventListener('click',function(){
+
+
+roll.addEventListener('click',function(){ // start rolling
     if(playing){
-let random=Math.trunc(Math.random()*6)+1
+let random=Math.trunc(Math.random()*6)+1 //creating the random num
 dice.classList.remove('hidden')
-dice.src=`pics/dice-${random}.png`
+dice.src=`pics/dice-${random}.png`//exposing the dices images to the user
 
 
 
 
 if(random===1)
 {
-   change()
+   change()//change the currnt statue of the player because an 1 has occuored
 }
 else
 if(activeplayer===0)
@@ -96,12 +101,12 @@ if(RealScore[activeplayer]>=100)
 document.querySelector(`.player--${activeplayer}`).classList.add('player--winner')
 
 }
-change()
+change() //change the current statue of the player becuase on of the players pressed hold
 }
 }
 )
 
-newbutton.addEventListener('click',function(){
+newbutton.addEventListener('click',function(){// this function is so simple its just reset all the values to its origin initial value 
 playing=true;
     currscore=0
     
