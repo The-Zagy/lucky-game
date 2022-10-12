@@ -125,3 +125,5 @@ document.querySelector(`.player--0`).classList.remove('player--winner')
 document.querySelector(`.player--0`).classList.add('player--active')
 document.querySelector(`.player--1`).classList.remove('player--active')
 })
+
+// add socket 
