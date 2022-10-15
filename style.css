@@ -170,10 +170,56 @@ main {
   display: none;
 }
 
+.father{
+  position: absolute;
+  top: 10%;
+  bottom: 0;
+  font-size: 6rem !important;
+  left: 25%;
+  color: #ddd;
+  transform: rotate(1deg);
+  -webkit-transform: rotate(1deg);
+  -moz-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  -o-transform: rotate(1deg);
+}
+.child
+{
+  font-size: 9.5rem !important;
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  top: 19%;
+  bottom: 0;
+  right: 25%;
+  left: 25%;
+  transform: rotate(-.5deg);
 
+color: bisque;
+}
+.child span{
+  color:cadetblue
+}
+.btn-create{
+  position: absolute;
+ top: 50%;
+}
 
+.btn-join{
+  position: absolute;
+ top: 65%;
+}
+.btn-local{
+  position: absolute;
+ top: 75%;
+}
 
-
+.text{
+  font-size: 2.5rem;
+  position: absolute;
+  top: 90%;
+  left: 37.5%;
+  right: 25%;
+}
 @media screen and (min-width: 0) and (max-width: 600px){
 html{
     font-size: 40.5%;
@@ -205,5 +251,12 @@ section{
 .name{
     font-size: 2.4rem;
 }
-
+.text{
+  display: none;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 90%;
+  left: 37.5%;
+  right: 25%;
+}
 }
