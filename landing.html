@@ -11,17 +11,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,900;1,400;1,900&family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Press+Start+2P&family=Roboto&family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <title>lucky game</title>
   </head>
+  <body>
   <section>
 <div>
 <h2 class=" father">
     welcome to
 </h2>
 <h1 class="child"> lucky <span> game</span> 🎲</h1>
-<button class="btn btn-create"> create room 🚥</button>
+<button class="btn btncreate"> create room 🚥</button>
 
-<button class="btn btn-join"> enter room 👬</button>
+<button class="btn btnjoin"> enter room 👬</button>
+<input type="text" placeholder="room id" class="roomid hidden" >
+<button class="btn btnsubmit hidden" > join ✅</button>
+<button class="btn btnlocal" onclick="play_local();"> play localy 🤝</button>
 
-<button class="btn btn-local"> play localy 🤝</button>
 <h3 class="text">The player with the most luck wins🏆</h3>
 </div>
   </section>
+<script src="landing.js"></script>
+</body>

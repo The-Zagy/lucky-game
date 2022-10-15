@@ -199,16 +199,16 @@ color: bisque;
 .child span{
   color:cadetblue
 }
-.btn-create{
+.btncreate{
   position: absolute;
  top: 50%;
 }
 
-.btn-join{
+.btnjoin{
   position: absolute;
- top: 65%;
+ top: 60%;
 }
-.btn-local{
+.btnlocal{
   position: absolute;
  top: 75%;
 }
@@ -219,6 +219,17 @@ color: bisque;
   top: 90%;
   left: 37.5%;
   right: 25%;
+}
+.roomid{
+  position: absolute;
+right: 45%;
+  top:70%;
+  background-color: transparent;
+}
+.btnsubmit{
+  position: absolute;
+left: 63%;
+    top:68%;
 }
 @media screen and (min-width: 0) and (max-width: 600px){
 html{
