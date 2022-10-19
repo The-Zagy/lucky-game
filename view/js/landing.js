@@ -1,11 +1,11 @@
-let btnlocal= document.querySelector(".btnlocal")
-let btnjoin= document.querySelector(".btnjoin")
-let btnsubmit= document.querySelector(".btnsubmit")
-let roomid=document.querySelector(".roomid")
-let  btncreate=document.querySelector(".btncreate")
+const btnlocal = document.querySelector('.btnlocal');
+const btnjoin = document.querySelector('.btnjoin');
+const btnsubmit = document.querySelector('.btnsubmit');
+const roomid = document.querySelector('.roomid');
+const btncreate = document.querySelector('.btncreate');
 ///////////////////////////////////////////////////
 function play_local(){
-    location.href="index.html"
+    location.href='/local';
 }
 ///////////////////////////////////////////////////
 btnjoin.addEventListener('click',function(){
