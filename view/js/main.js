@@ -47,9 +47,8 @@ roll.addEventListener('click', function () {
         //exposing the dices images to the user
         dice.classList.remove('hidden');
         dice.src = `pics/dice-${random}.png`;
-        //! this funny as fuck but the number 1 expose photo with 0 dice points so actully random == 1 here means 0 in the user eyes, i hate you my friend <3
         if (random === 1) {
-            change(); //change the currnt statue of the player because an 1 has occuored, DONT FORGET ONE IS ZERO HHH
+            change(); //change the currnt statue of the player because an 1 has occuored
         } else if (activeplayer === 0) {
             currscore += random;
             currentscore1.innerHTML = currscore;
