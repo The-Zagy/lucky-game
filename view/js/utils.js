@@ -13,3 +13,17 @@ export const change = function (
     currentscore2.innerHTML = 0;
     currentscore1.innerHTML = 0;
 };
+
+export function displayAnotherPlayerData(
+    diceNumber,
+    current,
+    diceHtml,
+    activeCurrentSocreHtml
+) {
+    activeCurrentSocreHtml.innerHTML = current;
+    diceHtml.classList.remove('hidden');
+    diceHtml.src = `/pics/dice-${diceNumber}.png`;
+}
+export function showRealScore(realScore, realScoreHtml) {
+    realScoreHtml.innerHTML = realScore;
+}

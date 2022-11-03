@@ -119,6 +119,35 @@ player1Namespace.on('connection', (socket: Socket1WUser) => {
             });
         }
     });
+    socket.on('holdedScore', () => {
+        if (socket.gameRoom !== undefined) {
+            db[socket.gameRoom].player1Score +=
+                db[socket.gameRoom].currentScore;
+            db[socket.gameRoom].currentScore = 0;
+            db[socket.gameRoom].activePlayer = 1;
+            db[socket.gameRoom].player1GameState = false;
+            db[socket.gameRoom].player2GameState = true;
+            player2Namespace.emit('player1HoldedScore', {
+                player1Score: db[socket.gameRoom].player1Score,
+                player2GameState: db[socket.gameRoom].player2GameState,
+                activePlayer: db[socket.gameRoom].activePlayer,
+                currentScore: db[socket.gameRoom].currentScore
+            });
+        }
+    });
+    socket.on('imSorryImJinkx', () => {
+        if (socket.gameRoom !== undefined) {
+            db[socket.gameRoom].currentScore = 0;
+            db[socket.gameRoom].player1GameState = false;
+            db[socket.gameRoom].player2GameState = true;
+            db[socket.gameRoom].activePlayer = 1;
+            player2Namespace.emit('player1OutOfLuck', {
+                currentScore: db[socket.gameRoom].currentScore,
+                activePlayer: db[socket.gameRoom].activePlayer,
+                player2GameState: db[socket.gameRoom].player2GameState
+            });
+        }
+    });
 });
 // middleware that wil only run for once when the player2 conenct for the first time
 // will check in it if player2 can join or not, if can join will setup db for the new player
@@ -159,6 +188,35 @@ player2Namespace.on('connection', (socket: Socket2WUser) => {
             player1Namespace.to(socket.gameRoom).emit('player2RolledDice', {
                 diceNumber: diceNumber,
                 currentScore: db[socket.gameRoom].currentScore
+            });
+        }
+    });
+    socket.on('holdedScore', () => {
+        if (socket.gameRoom !== undefined) {
+            db[socket.gameRoom].player2Score +=
+                db[socket.gameRoom].currentScore;
+            db[socket.gameRoom].currentScore = 0;
+            db[socket.gameRoom].activePlayer = 0;
+            db[socket.gameRoom].player2GameState = false;
+            db[socket.gameRoom].player1GameState = true;
+            player1Namespace.emit('player2HoldedScore', {
+                player2Score: db[socket.gameRoom].player2Score,
+                player1GameState: db[socket.gameRoom].player1GameState,
+                activePlayer: db[socket.gameRoom].activePlayer,
+                currentScore: db[socket.gameRoom].currentScore
+            });
+        }
+    });
+    socket.on('imSorryImJinkx', () => {
+        if (socket.gameRoom !== undefined) {
+            db[socket.gameRoom].currentScore = 0;
+            db[socket.gameRoom].player1GameState = true;
+            db[socket.gameRoom].player2GameState = false;
+            db[socket.gameRoom].activePlayer = 0;
+            player1Namespace.emit('player2OutOfLuck', {
+                currentScore: db[socket.gameRoom].currentScore,
+                activePlayer: db[socket.gameRoom].activePlayer,
+                player1GameState: db[socket.gameRoom].player1GameState
             });
         }
     });

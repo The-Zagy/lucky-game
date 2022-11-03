@@ -1,8 +1,8 @@
 const config = {
     roomId: '',
-    playing: false,
+    playing: true,
     currScore: 0,
     activePlayer: 0,
-    RealScore: [0, 0]
+    realScore: [0, 0]
 };
 export default config;
