@@ -9,12 +9,14 @@ function play_local(){
 }
 ///////////////////////////////////////////////////
 btnjoin.addEventListener('click',function(){
-roomid.classList.remove("hidden")
-btnsubmit.classList.remove("hidden")
-
+    roomid.classList.remove("hidden")
+    btnsubmit.classList.remove("hidden")
+    // location.href = '/player2';
+})
+btnsubmit.addEventListener('click', () => {
+    console.log(roomid.value);
+    window.location.replace('/player2/'+roomid.value);
 })
 btncreate.addEventListener('click',function(){
-
-
-    
+    location.href = '/player1';
 })
