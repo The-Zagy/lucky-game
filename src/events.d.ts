@@ -30,11 +30,13 @@ export interface Player1ServerToClientEvents {
         activePlayer: number;
         player1GameState: boolean;
     }) => void;
+    player2Won: () => void;
 }
 export interface Player1ClientsToServerEvents {
     rolledDice: (diceNumber: number) => void;
     holdedScore: () => void;
     imSorryImJinkx: () => void;
+    IWON: () => void;
 }
 export interface Player2ServerToClientEvents {
     joinedRoom: (roomMetaData: DbRow) => void;
@@ -53,11 +55,13 @@ export interface Player2ServerToClientEvents {
         activePlayer: number;
         player2GameState: boolean;
     }) => void;
+    player1Won: () => void;
 }
 export interface Player2ClientsToServerEvents {
     rolledDice: (diceNumber: number) => void;
     holdedScore: () => void;
     imSorryImJinkx: () => void;
+    IWON: () => void;
 }
 export interface InternalEvents {}
 export interface SocketData {

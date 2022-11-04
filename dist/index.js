@@ -101,6 +101,11 @@ player1Namespace.on('connection', (socket) => {
             });
         }
     });
+    socket.on('IWON', () => {
+        if (socket.gameRoom !== undefined) {
+            player2Namespace.to(socket.gameRoom).emit('player1Won');
+        }
+    });
 });
 player2Namespace.use((socket, next) => {
     if (can2Join(socket.handshake.auth.roomId)) {
@@ -161,6 +166,11 @@ player2Namespace.on('connection', (socket) => {
                 activePlayer: db[socket.gameRoom].activePlayer,
                 player1GameState: db[socket.gameRoom].player1GameState
             });
+        }
+    });
+    socket.on('IWON', () => {
+        if (socket.gameRoom !== undefined) {
+            player1Namespace.to(socket.gameRoom).emit('player2Won');
         }
     });
 });

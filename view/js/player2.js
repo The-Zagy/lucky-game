@@ -4,7 +4,8 @@ import {
     showRealScore,
     rollEventHandler,
     holdEventHandler,
-    initUi
+    initUi,
+    playerWon
 } from './utils.js';
 const player1 = document.querySelector('.player--0 ');
 const score1 = document.querySelector('#score--0');
@@ -22,7 +23,7 @@ const hold = document.querySelector('.btn--hold');
 initUi(score1, score2, dice);
 const socket = io('/player2', {
     auth: {
-        roomId: '7Q1aQUXV7ivibaoXAAAV'
+        roomId: 'i9gYt0nK28l1asHVAAAH'
     }
 });
 socket.on('joinedRoom', (room) => {
@@ -64,6 +65,11 @@ socket.on('player1OutOfLuck', (metaData) => {
     config.activePlayer = metaData.activePlayer;
     config.playing = metaData.player2GameState;
     currentscore1.innerHTML = config.currScore;
+});
+socket.on('player1Won', () => {
+    config.playing = false;
+    config.activePlayer = 0;
+    playerWon(0);
 });
 socket.on('connect_error', (err) => {
     console.log(err);

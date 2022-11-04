@@ -150,6 +150,11 @@ player1Namespace.on('connection', (socket: Socket1WUser) => {
             });
         }
     });
+    socket.on('IWON', () => {
+        if (socket.gameRoom !== undefined) {
+            player2Namespace.to(socket.gameRoom).emit('player1Won');
+        }
+    });
 });
 // middleware that wil only run for once when the player2 conenct for the first time
 // will check in it if player2 can join or not, if can join will setup db for the new player
@@ -222,6 +227,11 @@ player2Namespace.on('connection', (socket: Socket2WUser) => {
                 activePlayer: db[socket.gameRoom].activePlayer,
                 player1GameState: db[socket.gameRoom].player1GameState
             });
+        }
+    });
+    socket.on('IWON', () => {
+        if (socket.gameRoom !== undefined) {
+            player1Namespace.to(socket.gameRoom).emit('player2Won');
         }
     });
 });

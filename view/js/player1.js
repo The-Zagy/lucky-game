@@ -4,7 +4,8 @@ import {
     holdEventHandler,
     rollEventHandler,
     showRealScore,
-    initUi
+    initUi,
+    playerWon
 } from './utils.js';
 const player1 = document.querySelector('.player--0 ');
 const score1 = document.querySelector('#score--0');
@@ -73,6 +74,11 @@ socket.on('player2OutOfLuck', (metaData) => {
     config.activePlayer = metaData.activePlayer;
     config.playing = metaData.player1GameState;
     currentscore2.innerHTML = config.currScore;
+});
+socket.on('player2Won', () => {
+    config.playing = false;
+    config.activePlayer = 1;
+    playerWon(1);
 });
 socket.on('connect_error', (err) => {
     console.log(err);

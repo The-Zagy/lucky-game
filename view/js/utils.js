@@ -59,6 +59,14 @@ export function rollEventHandler(
         }
     }
 }
+export function playerWon(playerNumber) {
+    document
+        .querySelector(`.player--${playerNumber}`)
+        .classList.remove('player--active');
+    document
+        .querySelector(`.player--${playerNumber}`)
+        .classList.add('player--winner');
+}
 export function holdEventHandler(
     player1,
     player2,
@@ -81,13 +89,8 @@ export function holdEventHandler(
         socket.emit('holdedScore');
         //* who got 100 first wins logic
         if (config.realScore[config.activePlayer] >= 100) {
-            config.playing = false;
-            document
-                .querySelector(`.player--${config.activePlayer}`)
-                .classList.remove('player--active');
-            document
-                .querySelector(`.player--${config.activePlayer}`)
-                .classList.add('player--winner');
+            socket.emit('IWON');
+            playerWon(config.activePlayer);
         }
         change(player1, player2, currentScore1, currentScore2); //change the current statue of the player becuase on of the players pressed hold
     }

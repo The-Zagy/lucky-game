@@ -6,7 +6,9 @@
         "main": "dist/index.js",
         "scripts": {
                 "start": "node -r dotenv/config ./dist/index.js",
-                "build": "tsc --watch --preserveWatchOutput",
+                "build": "tsc",
+                "build:start": "npm run build && npm run start",
+                "build:watch": "tsc --watch --preserveWatchOutput",
                 "dev": "nodemon  -r dotenv/config dist/index ",
                 "ts": "ts-node-esm -r  dotenv/config src/index.ts",
                 "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
