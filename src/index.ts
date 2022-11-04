@@ -124,10 +124,11 @@ player1Namespace.on('connection', (socket: Socket1WUser) => {
             db[socket.gameRoom].player1Score +=
                 db[socket.gameRoom].currentScore;
             db[socket.gameRoom].currentScore = 0;
+            //switch game state between players[set player 2 as active]
             db[socket.gameRoom].activePlayer = 1;
             db[socket.gameRoom].player1GameState = false;
             db[socket.gameRoom].player2GameState = true;
-            player2Namespace.emit('player1HoldedScore', {
+            player2Namespace.to(socket.gameRoom).emit('player1HoldedScore', {
                 player1Score: db[socket.gameRoom].player1Score,
                 player2GameState: db[socket.gameRoom].player2GameState,
                 activePlayer: db[socket.gameRoom].activePlayer,
@@ -138,10 +139,11 @@ player1Namespace.on('connection', (socket: Socket1WUser) => {
     socket.on('imSorryImJinkx', () => {
         if (socket.gameRoom !== undefined) {
             db[socket.gameRoom].currentScore = 0;
+            //switch game state between players[set player 2 as active]
             db[socket.gameRoom].player1GameState = false;
             db[socket.gameRoom].player2GameState = true;
             db[socket.gameRoom].activePlayer = 1;
-            player2Namespace.emit('player1OutOfLuck', {
+            player2Namespace.to(socket.gameRoom).emit('player1OutOfLuck', {
                 currentScore: db[socket.gameRoom].currentScore,
                 activePlayer: db[socket.gameRoom].activePlayer,
                 player2GameState: db[socket.gameRoom].player2GameState
@@ -196,10 +198,11 @@ player2Namespace.on('connection', (socket: Socket2WUser) => {
             db[socket.gameRoom].player2Score +=
                 db[socket.gameRoom].currentScore;
             db[socket.gameRoom].currentScore = 0;
+            //swwitch game state between players[set player 1 as active]
             db[socket.gameRoom].activePlayer = 0;
             db[socket.gameRoom].player2GameState = false;
             db[socket.gameRoom].player1GameState = true;
-            player1Namespace.emit('player2HoldedScore', {
+            player1Namespace.to(socket.gameRoom).emit('player2HoldedScore', {
                 player2Score: db[socket.gameRoom].player2Score,
                 player1GameState: db[socket.gameRoom].player1GameState,
                 activePlayer: db[socket.gameRoom].activePlayer,
@@ -210,10 +213,11 @@ player2Namespace.on('connection', (socket: Socket2WUser) => {
     socket.on('imSorryImJinkx', () => {
         if (socket.gameRoom !== undefined) {
             db[socket.gameRoom].currentScore = 0;
+            //swwitch game state between players[set player 1 as active]
             db[socket.gameRoom].player1GameState = true;
             db[socket.gameRoom].player2GameState = false;
             db[socket.gameRoom].activePlayer = 0;
-            player1Namespace.emit('player2OutOfLuck', {
+            player1Namespace.to(socket.gameRoom).emit('player2OutOfLuck', {
                 currentScore: db[socket.gameRoom].currentScore,
                 activePlayer: db[socket.gameRoom].activePlayer,
                 player1GameState: db[socket.gameRoom].player1GameState

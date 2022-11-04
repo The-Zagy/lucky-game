@@ -1,5 +1,11 @@
 import config from './config.js';
-import { change, displayAnotherPlayerData, showRealScore } from './utils.js';
+import {
+    displayAnotherPlayerData,
+    holdEventHandler,
+    rollEventHandler,
+    showRealScore,
+    initUi
+} from './utils.js';
 const player1 = document.querySelector('.player--0 ');
 const score1 = document.querySelector('#score--0');
 const currentscore1 = document.getElementById('current--0');
@@ -13,8 +19,9 @@ const dice = document.querySelector('.dice');
 const roll = document.querySelector('.btn--roll');
 const newbutton = document.querySelector('.btn--new');
 const hold = document.querySelector('.btn--hold');
-
-let socket = io('/player1');
+initUi(score1, score2, dice);
+const socket = io('/player1');
+//TODO global function to handle init the config becuase it's the same function between player1/2
 socket.on('roomCreated', (room) => {
     console.log('room id', room);
     config.realScore[0] = room.player1Score;
@@ -70,51 +77,24 @@ socket.on('player2OutOfLuck', (metaData) => {
 socket.on('connect_error', (err) => {
     console.log(err);
 });
-roll.addEventListener('click', function () {
-    // start rolling
-    if (config.playing) {
-        const random = Math.trunc(Math.random() * 6) + 1; //creating the random num
-        //exposing the dices images to the user
-        dice.classList.remove('hidden');
-        dice.src = `/pics/dice-${random}.png`;
-        //emit to the server "rolledDice" even with the dice number
-        socket.emit('rolledDice', random);
-        if (random === 1) {
-            currentscore1.innerHTML = 0;
-            currentscore2.innerHTML = 0;
-            socket.emit('imSorryImJinkx');
-            config.playing = false;
-            // change(player1, player2, currentscore1, currentscore2); //change the currnt statue of the player because an 1 has occuored
-        } else if (config.activePlayer === 0) {
-            config.currScore += random;
-            currentscore1.innerHTML = config.currScore;
-        } else if (config.activePlayer === 1) {
-            config.currScore += random;
-            currentscore2.innerHTML = config.currScore;
-        }
-    }
+roll.addEventListener('click', () => {
+    rollEventHandler(
+        player1,
+        player2,
+        dice,
+        currentscore1,
+        currentscore2,
+        socket
+    );
 });
-hold.addEventListener('click', function () {
-    if (config.playing) {
-        if (config.activePlayer === 0) {
-            config.realScore[0] += Number(config.currScore);
-            score1.innerHTML = config.realScore[0];
-        } else if (config.activePlayer === 1) {
-            config.realScore[1] += Number(config.currScore);
-            score2.innerHTML = config.realScore[1];
-        }
-        config.playing = false;
-        socket.emit('holdedScore');
-        //* who got 100 first wins logic
-        if (config.realScore[config.activePlayer] >= 100) {
-            config.playing = false;
-            document
-                .querySelector(`.player--${config.activePlayer}`)
-                .classList.remove('player--active');
-            document
-                .querySelector(`.player--${config.activePlayer}`)
-                .classList.add('player--winner');
-        }
-        // change(); //change the current statue of the player becuase on of the players pressed hold
-    }
+hold.addEventListener('click', () => {
+    holdEventHandler(
+        player1,
+        player2,
+        score1,
+        score2,
+        currentscore1,
+        currentscore2,
+        socket
+    );
 });

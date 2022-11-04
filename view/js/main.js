@@ -18,7 +18,6 @@ const roll = document.querySelector('.btn--roll');
 const newbutton = document.querySelector('.btn--new');
 const hold = document.querySelector('.btn--hold');
 
-// need to know what each global var do to give them the right control with socket.io
 let currscore = 0;
 //keep track which player is active [0 => player1, 1 => player2];
 let activeplayer = 0;
