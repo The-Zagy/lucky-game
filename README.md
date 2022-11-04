@@ -4,7 +4,7 @@
 ## How to start the demo 
 - Clone  ``git clone git@github.com:The-Zagy/lucky-game.git``
 - `cd lucky-game`
-- `npm install` 
+- `npm install`
 - You can run `npm run build:start` to build application then start  **or**
 
 ```
