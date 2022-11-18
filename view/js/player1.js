@@ -19,8 +19,19 @@ const dice = document.querySelector('.dice');
 
 const roll = document.querySelector('.btn--roll');
 const newbutton = document.querySelector('.btn--new');
+const copiedToClipboardNotification = document.querySelector('.tool-tip');
 const hold = document.querySelector('.btn--hold');
 const headerRoomID = document.querySelector('.headerRoomID');
+headerRoomID.addEventListener('click', () => {
+    navigator.clipboard.writeText(headerRoomID.textContent);
+    //Add bubble copied to clipboard
+    if (!copiedToClipboardNotification.classList.contains('visible')) {
+        copiedToClipboardNotification.classList.add('visible');
+        setTimeout(function () {
+            copiedToClipboardNotification.classList.remove('visible');
+        }, 1000); //Time before execution
+    }
+});
 initUi(score1, score2, dice);
 const socket = io('/player1');
 //TODO global function to handle init the config becuase it's the same function between player1/2
