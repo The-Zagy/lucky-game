@@ -5,7 +5,8 @@ import {
     rollEventHandler,
     holdEventHandler,
     initUi,
-    playerWon
+    playerWon,
+    extractID
 } from './utils.js';
 const player1 = document.querySelector('.player--0 ');
 const score1 = document.querySelector('#score--0');
@@ -23,7 +24,7 @@ const hold = document.querySelector('.btn--hold');
 initUi(score1, score2, dice);
 const socket = io('/player2', {
     auth: {
-        roomId: 'i9gYt0nK28l1asHVAAAH'
+        roomId: extractID(document.URL)
     }
 });
 socket.on('joinedRoom', (room) => {

@@ -43,7 +43,7 @@ app.get('/game/local', (_req: express.Request, res: express.Response) => {
 app.get('/game/player1', (_req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('view/player1.html'));
 });
-app.get('/game/player2', (_req: express.Request, res: express.Response) => {
+app.get('/game/player2/:id', (_req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('view/player2.html'));
 });
 

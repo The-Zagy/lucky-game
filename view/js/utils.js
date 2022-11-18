@@ -102,3 +102,9 @@ export const initUi = (score1, score2, dice) => {
     score2.textContent = 0;
     dice.classList.add('hidden'); // hide the dice images
 };
+// function to extract room id from player2 site when click join room
+export const extractID = (url) => {
+    const id = new URL(url).pathname.split('/').at(-1);
+    console.log(id);
+    return id;
+};
