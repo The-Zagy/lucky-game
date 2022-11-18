@@ -20,6 +20,7 @@ const dice = document.querySelector('.dice');
 const roll = document.querySelector('.btn--roll');
 const newbutton = document.querySelector('.btn--new');
 const hold = document.querySelector('.btn--hold');
+const headerRoomID = document.querySelector('.headerRoomID');
 initUi(score1, score2, dice);
 const socket = io('/player1');
 //TODO global function to handle init the config becuase it's the same function between player1/2
@@ -31,6 +32,7 @@ socket.on('roomCreated', (room) => {
     config.playing = room.player1GameState;
     config.activePlayer = room.activePlayer;
     config.roomId = room.id;
+    headerRoomID.innerHTML = room.id;
 });
 socket.on('player2JoinedRoom', (roomData) => {
     console.log(roomData);

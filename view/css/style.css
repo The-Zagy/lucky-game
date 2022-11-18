@@ -23,6 +23,15 @@ body {
 }
 
 /* LAYOUT */
+header {
+  /* position: sticky; */
+  /* top: 0; */
+  /* left: 0; */
+  width: 50rem;
+  height: 5rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  font-size: 2rem;
+}
 main {
   position: relative;
   width: 100rem;
