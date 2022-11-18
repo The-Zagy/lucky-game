@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -21,16 +21,67 @@ body {
   align-items: center;
   justify-content: center;
 }
+.main-main-header{
+  display: flex;
+  align-items: center;
+ width: 100%;
+ position: relative;
+ justify-content: space-between;
+}
+.main-header{
+  text-align: center;
+  
+}
+.main-header>a{
+  font-family: 'Great Vibes', cursive;
+  color: white;
+  text-decoration: none;
 
+  font-size: 8rem;
+}
+.main-header>a::after{
+  font-family:'Courier New', Courier, monospace;
+  font-size: 2rem;
+  text-align: right;
+  content: "af";
+}
 /* LAYOUT */
-header {
+.headerRoomID {
   /* position: sticky; */
   /* top: 0; */
   /* left: 0; */
   width: 50rem;
-  height: 5rem;
+  user-select: none;
+  cursor: pointer;
   background-color: rgba(255, 255, 255, 0.35);
   font-size: 2rem;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+}
+.tool-tip{
+  position: absolute;
+  z-index: 1000;
+  margin: 3px;
+  right: 1px;
+  bottom: 0px;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 0ms 150ms, opacity 150ms 0ms;
+  margin-right: auto;
+  color: white;
+  background-color: rgba(37, 37, 37, 0.35);
+  width: 100px;
+  padding: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+
+
+}
+.tool-tip.visible {
+  height: auto; opacity: 1;
+  transition: height 0ms 0ms, opacity 600ms 0ms;
 }
 main {
   position: relative;
