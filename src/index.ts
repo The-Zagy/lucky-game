@@ -8,9 +8,10 @@ import {
     Player1ServerToClientEvents,
     Player2ClientsToServerEvents,
     Player2ServerToClientEvents,
-    SocketData,
-    DbRow
+    SocketData
 } from './events';
+import { createRoom, can2Join, player2JoinRoomSetup } from './utils.js';
+import db from './db.js';
 //init constatns for server and port
 const app = express();
 const server = createServer(app);
@@ -28,7 +29,6 @@ const player2Namespace: Namespace<
     InternalEvents,
     SocketData
 > = io.of('/player2');
-const port = process.env.PORT || 3000;
 //express middlewares
 app.use(express.static(path.resolve('view/css')));
 app.use(express.static(path.resolve('view/js')));
@@ -46,41 +46,8 @@ app.get('/game/player1', (_req: express.Request, res: express.Response) => {
 app.get('/game/player2', (_req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve('view/player2.html'));
 });
-//mock db
-//gameState false means not playing
-//active player for now boolean true => player1 false => player2
-// TODO change active player type to enum or any shit
-const db: {
-    [name: string]: DbRow;
-} = {};
-//function to check if player 2 can join the room
-function can2Join(roomId: string): boolean {
-    if (roomId in db && !db[roomId].player2Id) return true;
-    return false;
-}
-function createRoom(roomId: string): boolean {
-    //our logic for now is the room created by the player1 id so roomId is the same as player1 id
-    //not storing player2, player2 will asign theirselves
-    db[roomId] = {
-        id: roomId,
-        player1Id: roomId,
-        activePlayer: 0,
-        player1Score: 0,
-        player2Score: 0,
-        currentScore: 0,
-        player1GameState: false,
-        player2GameState: false
-    };
-    return true;
-}
-function player2JoinRoomSetup(roomId: string, player2Id: string): void {
-    db[roomId].player2Id = player2Id;
-    db[roomId].player1GameState = true;
-}
+
 //* socket.io events tree
-// io.on('connection', (socket) => {
-//     console.log('user connected');
-// });
 //middleware for player1 to create room in db before connecting to the server, if the room creation failed refuse the connection
 player1Namespace.use((socket, next) => {
     if (createRoom(socket.id)) {
@@ -236,6 +203,7 @@ player2Namespace.on('connection', (socket: Socket2WUser) => {
     });
 });
 //listen
+const port = process.env.PORT || 3000;
 server.listen(port, () => {
-    console.log(`listen on port ${port}`);
+    console.log(`listen on port http://localhost:${port}`);
 });
